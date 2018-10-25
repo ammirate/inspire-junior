@@ -1,0 +1,11 @@
+backend:
+  build: .
+  ports:
+   - "5000:5000"
+  volumes:
+   - .:/code
+
+frontend:
+  build: ./react_app
+  ports:
+  - "3000:3000"
