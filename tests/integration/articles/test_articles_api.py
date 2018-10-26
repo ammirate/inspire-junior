@@ -24,29 +24,30 @@ def test_read_article(test_app, db_article):
     article = read_article(db_article.id)
     assert article
     assert article.title == 'A Model of Leptons'
-    assert article.category == 'hep-th'
     assert article.abstract == 'lorem ipsum'
+    assert article.category.name == 'hep-th'
 
 
 def test_read_article_not_in_db(test_app):
     read_article(98877554)
 
 
-def test_create_article_no_abstract(test_app):
+def test_create_article_no_abstract(test_app, db_category):
     metadata = {
         'title':    'A Model of Leptons',
-        'category': 'hep-ex',
+        'category_id': db_category.id,
     }
     model = create_article(metadata)
     model_id = model.id
 
     db_model = read_article(model_id)
     assert db_model.title == metadata['title']
-    assert db_model.category == metadata['category']
+    assert db_model.category_id == metadata['category_id']
     assert db_model.abstract is None
+    assert db_model.category.name == db_category.name
 
 
-def test_create_article_long_abstract(test_app):
+def test_create_article_long_abstract(test_app, db_category):
     metadata_path = pkg_resources.resource_filename(
         __name__,
         'fixtures/too_long_abstract.json'
@@ -58,8 +59,9 @@ def test_create_article_long_abstract(test_app):
 
     db_model = read_article(model_id)
     assert db_model.title == metadata['title']
-    assert db_model.category == metadata['category']
+    assert db_model.category_id == metadata['category_id']
     assert db_model.abstract == metadata['abstract']
+    assert db_model.category.name == db_category.name
 
 
 def test_create_article_no_category_raises_error(test_app):

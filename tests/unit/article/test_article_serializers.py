@@ -5,10 +5,10 @@ from backend.articles.models import Article
 def test_article_schema():
     article = Article(
         title='Partial Symmetries of Weak Interactions',
-        category='hep-th',
+        category_id=1,
     )
     expected_json = {
-        'category': 'hep-th',
+        'category_id': 1,
         'abstract': '',
         'id': 0,
         'title': 'Partial Symmetries of Weak Interactions'

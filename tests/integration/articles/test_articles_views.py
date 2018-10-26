@@ -41,8 +41,8 @@ def test_get_article_404(test_client):
 def test_post_article(test_client, article):
     metadata = article.dump()
     expected_data = {
-        'category': 'hep-th',
         'abstract': 'lorem ipsum',
+        'category_id': 1,
         'id': 1,
         'title': 'A Model of Leptons'
     }

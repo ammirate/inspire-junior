@@ -5,7 +5,7 @@ from backend.articles.errors import ArticleMetadataError
 
 def _extract_data_from_json(json_model):
     metadata = dict(
-        category=json_model['category'],
+        category_id=json_model['category_id'],
         title=json_model['title'],
         abstract=json_model.get('abstract'),
     )
@@ -13,9 +13,10 @@ def _extract_data_from_json(json_model):
 
 
 def _check_data(json_model):
-    if 'title' not in json_model or 'category' not in json_model:
+    if 'title' not in json_model or 'category_id' not in json_model:
         raise ArticleMetadataError(
-            '`Title` and `Category` are required fields. Got {}'.format(json_model)
+            '`Title` and `Category_id` are required fields. Got {}'.format(
+                json_model)
         )
 
 

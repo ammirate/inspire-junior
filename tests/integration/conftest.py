@@ -19,10 +19,20 @@ def test_client(test_app):
 
 
 @pytest.fixture
-def article():
+def db_category(test_app):
+    category = Category(name='hep-th')
+    db.session.add(category)
+    db.session.commit()
+    yield category
+    db.session.query(Article).filter_by(id=category.id).delete()
+    db.session.commit()
+
+
+@pytest.fixture
+def article(db_category):
     return Article(
         title='A Model of Leptons',
-        category='hep-th',
+        category_id=db_category.id,
         abstract='lorem ipsum'
     )
 
