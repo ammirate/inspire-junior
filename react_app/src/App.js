@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 
 import NavBar from "./containers/application/navBar";
-
-import { Route, NavLink, HashRouter } from "react-router-dom";
-
-import ContactsContainer from "./containers/contacts/contactsContainer";
-import HomeContainer from "./containers/home/homeContainer";
-import UserListContainer from "./containers/users/userListContainer";
+import ArticleListContainer from "./containers/articles/articleListContainer";
 
 class App extends Component {
   constructor(props) {
@@ -20,14 +15,10 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <HashRouter>
-          <div>
-            <NavBar />
-            <Route exact path="/" component={HomeContainer} />
-            <Route path="/users" component={UserListContainer} />
-            <Route path="/contacts" component={ContactsContainer} />
-          </div>
-        </HashRouter>
+        <div>
+          <NavBar />
+          <ArticleListContainer />
+        </div>
       </React.Fragment>
     );
   }

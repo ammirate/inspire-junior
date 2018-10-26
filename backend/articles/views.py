@@ -33,7 +33,7 @@ def get_article(article_id):
 
 @bp_articles.route('/', methods=['POST'])
 def post_article():
-    # curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "article 1", "category": "hep-th"}' -H "Content-Type: application/json"
+    # curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "article 1", "category_id": 1}' -H "Content-Type: application/json"
     metadata = request.json
 
     try:

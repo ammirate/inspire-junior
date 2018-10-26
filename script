@@ -1,0 +1,21 @@
+import requests
+import json
+
+
+requests.post('http://0.0.0.0:5000/api/categories/', data=json.dumps({"name": "hep-th"}))
+requests.post('http://0.0.0.0:5000/api/categories/', data=json.dumps({"name": "astro"}))
+requests.post('http://0.0.0.0:5000/api/categories/', data=json.dumps({"name": "it-se"}))
+
+
+requests.post('http://0.0.0.0:5000/api/articles/', data=json.dumps({"title": "niiiiceee", 'category_id':1}))
+requests.post('http://0.0.0.0:5000/api/articles/', data=json.dumps({"title": "booooh", 'category_id':2}))
+requests.post('http://0.0.0.0:5000/api/articles/', data=json.dumps({"title": "cose belle", 'category_id':2}))
+requests.post('http://0.0.0.0:5000/api/articles/', data=json.dumps({"title": "sono proprio bravo", 'category_id':2}))
+requests.post('http://0.0.0.0:5000/api/articles/', data=json.dumps({"title": "bosonone", 'category_id':3}))
+
+
+
+curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "A categoria 2", "category_id": 2}' -H "Content-Type: application/json";
+curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "niiiiice", "category_id": 1}' -H "Content-Type: application/json";
+curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "che bravissimo", "category_id": 1}' -H "Content-Type: application/json";
+curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "bosonone di higgs", "category_id": 1}' -H "Content-Type: application/json";
