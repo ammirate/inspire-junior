@@ -22,9 +22,11 @@ def create_app(config_env):
     # blueprints
     from backend.views import bp, bp_api
     from backend.articles.views import bp_articles
+    from backend.categories.views import bp_categories
 
     app.register_blueprint(bp)
     app.register_blueprint(bp_api)
     app.register_blueprint(bp_articles)
+    app.register_blueprint(bp_categories)
 
     return app

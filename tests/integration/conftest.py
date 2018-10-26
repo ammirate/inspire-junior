@@ -3,6 +3,7 @@ import pytest
 from backend.db import db
 from backend.factory import create_app
 from backend.articles.models import Article
+from backend.categories.models import Category
 
 
 @pytest.fixture
@@ -32,4 +33,14 @@ def db_article(test_app, article):
     db.session.commit()
     yield article
     db.session.query(Article).filter_by(id=article.id).delete()
+    db.session.commit()
+
+
+@pytest.fixture
+def db_category(test_app):
+    category = Category(name='hep-th')
+    db.session.add(category)
+    db.session.commit()
+    yield category
+    db.session.query(Category).filter_by(id=category.id).delete()
     db.session.commit()

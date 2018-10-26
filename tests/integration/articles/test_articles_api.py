@@ -2,7 +2,6 @@ import json
 import pytest
 import pkg_resources
 
-from backend.db import db
 from backend.articles.api import (
     get_articles,
     read_article,
@@ -10,7 +9,6 @@ from backend.articles.api import (
     update_article,
     delete_article,
 )
-from backend.articles.models import Article
 from backend.articles.errors import ArticleMetadataError
 
 
