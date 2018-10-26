@@ -1,6 +1,5 @@
-from backend import app
-from backend import db
+from backend.factory import create_app
 
 
-db.create_all()
+app = create_app('development')
 app.run(debug=True, host='0.0.0.0')

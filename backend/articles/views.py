@@ -1,13 +1,10 @@
 from flask import Blueprint, jsonify
 
-from backend.modules.articles.api import (
-    create_article,
-    delete_article,
+from backend.articles.api import (
     get_articles,
     read_article,
-    update_article,
 )
-from backend.modules.articles.serializer import ArticleSerializer
+from backend.articles.serializer import ArticleSerializer
 
 
 bp_articles = Blueprint('articles', __name__, url_prefix='/api/articles')
