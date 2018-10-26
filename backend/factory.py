@@ -15,7 +15,7 @@ def create_app(config_env):
 
     # extensions
     db.init_app(app)
-    init_db()
+    init_db(app)
 
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 

@@ -14,7 +14,9 @@ def _extract_data_from_json(json_model):
 
 def _check_data(json_model):
     if 'title' not in json_model or 'category' not in json_model:
-        raise ArticleMetadataError('`Title` and `Category` are required fields')
+        raise ArticleMetadataError(
+            '`Title` and `Category` are required fields. Got {}'.format(json_model)
+        )
 
 
 def create_article(json_model):

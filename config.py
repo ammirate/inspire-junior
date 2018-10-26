@@ -7,6 +7,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config(object):
     APP_NAME = 'inspire-junior'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    ERROR_404_HELP = False
 
 
 class DevelopmentConfig(Config):

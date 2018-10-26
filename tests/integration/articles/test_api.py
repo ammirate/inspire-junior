@@ -14,24 +14,6 @@ from backend.articles.models import Article
 from backend.articles.errors import ArticleMetadataError
 
 
-@pytest.fixture
-def article():
-    return Article(
-        title='A Model of Leptons',
-        category='hep-th',
-        abstract='lorem ipsum'
-    )
-
-
-@pytest.fixture
-def db_article(article):
-    db.session.add(article)
-    db.session.commit()
-    yield article
-    db.session.query(Article).filter_by(id=article.id).delete()
-    db.session.commit()
-
-
 def test_get_articles_empty_db(test_app):
     assert get_articles() == []
 

@@ -1,7 +1,7 @@
 from marshmallow import fields, Schema
 
 
-class ArticleSerializer(Schema):
+class ArticleSchema(Schema):
     """Serializer for scientific articles"""
     id = fields.Int()
     category = fields.String()
