@@ -8,29 +8,18 @@ class ArticleListContainer extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    this.refresh();
-  }
-
-  refresh() {
-    axios.get("http://0.0.0.0:5000/api/articles/").then(resp => {
-      console.log("[list] Got articles ", resp.data);
-      this.setState({ articles: resp.data });
-    });
-  }
-
   render() {
-    if (!this.state.articles) {
+    if (this.props.articles.length === 0) {
       return (
         <div className="container">
-          <h4>No articles</h4>
+          <h4>No articles found</h4>
         </div>
       );
     }
 
     return (
       <div className="container list-group">
-        {this.state.articles.map(article => (
+        {this.props.articles.map(article => (
           <ArticleContainer article={article} key={article.id} />
         ))}
       </div>

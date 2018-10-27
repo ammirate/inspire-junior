@@ -16,7 +16,13 @@ bp_articles = Blueprint('articles', __name__, url_prefix='/api/articles')
 @bp_articles.route('/', methods=['GET'])
 def get_articles_list():
     category_id = request.args.get('category_id')
-    if category_id:
+
+    try:
+        category_id = int(category_id)
+    except (ValueError, TypeError):
+        category_id = None
+
+    if category_id and category_id >= 0:
         articles = get_articles_by_category(category_id)
     else:
         articles = get_articles()

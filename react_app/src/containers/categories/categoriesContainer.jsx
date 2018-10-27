@@ -8,8 +8,13 @@ class CategoriesContainer extends Component {
   render() {
     return (
       <div className="container">
-        <select defaultValue={undefined} className="custom-select">
-          <option value={undefined}>All categories</option>
+        <select defaultValue={-1} className="custom-select">
+          <option value={-1}>All categories</option>
+          {this.props.categories.map(cat => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
         </select>
       </div>
     );

@@ -43,6 +43,18 @@ def test_get_articles_non_empty_db_category_id_not_ok(test_client, db_article):
     assert resp_data == expected_data
 
 
+def test_get_articles_non_empty_db_category_id_minus_one_return_all(
+    test_client, db_article
+):
+    resp = test_client.get('/api/articles?category_id=-1')
+    resp_data = json.loads(resp.data)
+
+    expected_data = [db_article.dump()]
+
+    assert resp.status_code == 200
+    assert resp_data == expected_data
+
+
 def test_get_article(test_client, db_article):
     article_id = db_article.id
 
@@ -81,7 +93,7 @@ def test_post_article(test_client, article):
     assert resp_data == expected_data
 
 
-def test_post_article_bad_request(test_client, ):
+def test_post_article_bad_request(test_client):
     metadata = {'title': 'FooBar'}  # missing category
 
     resp = test_client.post(
