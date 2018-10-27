@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Label from "bootstrap";
 
 class ArticleContainer extends Component {
   constructor(props) {
@@ -18,9 +19,7 @@ class ArticleContainer extends Component {
             <h2 className="card-title"> {article["title"]} </h2>
             <p className="card-text">{article["abstract"]}</p>
             <div className="card-subtitle">
-              <span className="label label-default">
-                {article["category_id"]} - {article["category"]}
-              </span>
+              <Label bsStyle="primary">{article["category"]["name"]}</Label>
             </div>
           </div>
         </div>

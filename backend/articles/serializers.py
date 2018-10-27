@@ -1,4 +1,5 @@
 from marshmallow import fields, Schema
+from backend.categories.serializers import CategorySchema
 
 
 class ArticleSchema(Schema):
@@ -7,3 +8,4 @@ class ArticleSchema(Schema):
     category_id = fields.Integer()
     abstract = fields.String()
     title = fields.String()
+    category = fields.Nested(CategorySchema)

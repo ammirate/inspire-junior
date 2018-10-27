@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ArticleContainer from "./articleContainer";
+import ArticleContainer from "../articles/articleContainer";
 import axios from "axios";
 
 class ArticleListContainer extends Component {
