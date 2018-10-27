@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ArticleContainer from "../articles/articleContainer";
+import ArticleContainer from "./articleContainer";
 import axios from "axios";
 
 class ArticleListContainer extends Component {
@@ -25,7 +25,7 @@ class ArticleListContainer extends Component {
     }
 
     return (
-      <div className="list-group">
+      <div className="container list-group">
         {this.state.articles.map(article => (
           <ArticleContainer article={article} key={article.id} />
         ))}
