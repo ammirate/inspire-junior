@@ -4,8 +4,8 @@ import NavBar from "./application/navBar";
 import ArticleListContainer from "./articles/articleListContainer";
 import CategoriesContainer from "./categories/categoriesContainer";
 
-const ARTICLES_API = "http://0.0.0.0:5000/api/articles";
-const CATEGORIES_API = "http://0.0.0.0:5000/api/categories";
+const ARTICLES_API = "http://0.0.0.0:5555/api/articles";
+const CATEGORIES_API = "http://0.0.0.0:5555/api/categories";
 
 class MainContainer extends Component {
   constructor(props) {

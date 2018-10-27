@@ -1,12 +1,12 @@
 scraper_site:
   image: 'drjova/article-data-codereview'
   ports:
-  - "8080:8080"
+  - "8080:5000"
 
 backend:
   build: .
   ports:
-   - "5000:5000"
+      - "5555:5555"
   volumes:
    - .:/code
 
