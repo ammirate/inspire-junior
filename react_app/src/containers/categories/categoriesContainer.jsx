@@ -8,7 +8,11 @@ class CategoriesContainer extends Component {
   render() {
     return (
       <div className="container">
-        <select defaultValue={-1} className="custom-select">
+        <select
+          defaultValue={-1}
+          className="custom-select"
+          onChange={this.props.onChange}
+        >
           <option value={-1}>All categories</option>
           {this.props.categories.map(cat => (
             <option key={cat.id} value={cat.id}>

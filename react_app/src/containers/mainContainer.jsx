@@ -11,24 +11,19 @@ class MainContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.handleOnSelect = this.handleOnChange.bind(this);
   }
 
   load_articles(cat_id) {
     axios.get(ARTICLES_API + "?category_id=" + cat_id).then(resp => {
-      console.log("[list] Got articles ", resp.data);
       this.setState({ articles: resp.data });
     });
   }
 
   load_categories() {
     axios.get(CATEGORIES_API).then(resp => {
-      console.log("[list] Got categories ", resp.data);
       this.setState({ categories: resp.data });
     });
-  }
-
-  handleOnSelect() {
-    // get_articles()
   }
 
   componentWillMount() {
@@ -38,30 +33,30 @@ class MainContainer extends Component {
     // request articles
     this.load_categories();
     this.load_articles(-1); // all
-
-    console.log("will mount", this.state);
   }
 
   componentDidMount() {
     // remove loading state
     this.setState({ loading: false });
-    console.log("did mount", this.state);
   }
 
-  handleOnSelect() {
-    // load new articles
-  }
+  handleOnChange = event => {
+    var cat_id = event.target.value;
+    console.log("selected category  " + cat_id);
+    this.load_articles(cat_id);
+  };
 
   render() {
-    console.log("render", this.state);
-
     if (this.state.loading) {
       return <h1>Loading...</h1>;
     }
     return (
       <div>
         <NavBar />
-        <CategoriesContainer categories={this.state.categories || []} />
+        <CategoriesContainer
+          categories={this.state.categories || []}
+          onChange={this.handleOnChange}
+        />
         <hr />
         <ArticleListContainer articles={this.state.articles || []} />
       </div>
