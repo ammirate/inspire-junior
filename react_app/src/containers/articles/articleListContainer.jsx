@@ -25,11 +25,11 @@ class ArticleListContainer extends Component {
     }
 
     return (
-      <React.Fragment>
+      <div className="list-group">
         {this.state.articles.map(article => (
           <ArticleContainer article={article} key={article.id} />
         ))}
-      </React.Fragment>
+      </div>
     );
   }
 }
