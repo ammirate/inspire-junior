@@ -62,6 +62,18 @@ def get_articles():
     return db.session.query(Article).all()
 
 
+def get_articles_by_category(category_id):
+    """Return all the Articles belonging to the given category
+
+    Args:
+        category_id(Int): Category ID
+
+    Return:
+        (List): the Articles in the DB
+    """
+    return db.session.query(Article).filter_by(category_id=category_id).all()
+
+
 def update_article(article_id, json_model):
     """Update an Article in the DB
 

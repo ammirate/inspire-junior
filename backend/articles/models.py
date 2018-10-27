@@ -21,6 +21,7 @@ class Article(db.Model):
 
     def dump(self):
         return dict(
+            category={} if not self.category else self.category.dump(),
             abstract=self.abstract,
             category_id=self.category_id,
             id=self.id,

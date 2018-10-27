@@ -2,6 +2,7 @@ from flask import abort, Blueprint, jsonify, request
 
 from backend.articles.api import (
     get_articles,
+    get_articles_by_category,
     read_article,
     create_article,
 )
@@ -14,8 +15,12 @@ bp_articles = Blueprint('articles', __name__, url_prefix='/api/articles')
 
 @bp_articles.route('/', methods=['GET'])
 def get_articles_list():
-    # curl -X GET http://0.0.0.0:5000/api/articles/1 -H "Content-Type: application/json"
-    articles = get_articles()
+    category_id = request.args.get('category_id')
+    if category_id:
+        articles = get_articles_by_category(category_id)
+    else:
+        articles = get_articles()
+
     serialized = ArticleSchema(articles, many=True).data
     return jsonify(serialized)
 
@@ -33,7 +38,6 @@ def get_article(article_id):
 
 @bp_articles.route('/', methods=['POST'])
 def post_article():
-    # curl -X POST http://0.0.0.0:5000/api/articles/ -d '{"title": "article 1", "category_id": 1}' -H "Content-Type: application/json"
     metadata = request.json
 
     try:

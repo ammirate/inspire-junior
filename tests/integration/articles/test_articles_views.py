@@ -21,6 +21,28 @@ def test_get_articles_non_empty_db(test_client, db_article):
     assert resp_data == expected_data
 
 
+def test_get_articles_non_empty_db_category_id_ok(test_client, db_article):
+    resp = test_client.get('/api/articles?category_id=1')
+    resp_data = json.loads(resp.data)
+
+    expected_data = [
+        db_article.dump()
+    ]
+
+    assert resp.status_code == 200
+    assert resp_data == expected_data
+
+
+def test_get_articles_non_empty_db_category_id_not_ok(test_client, db_article):
+    resp = test_client.get('/api/articles?category_id=123456')
+    resp_data = json.loads(resp.data)
+
+    expected_data = []
+
+    assert resp.status_code == 200
+    assert resp_data == expected_data
+
+
 def test_get_article(test_client, db_article):
     article_id = db_article.id
 
@@ -42,6 +64,7 @@ def test_post_article(test_client, article):
     metadata = article.dump()
     expected_data = {
         'abstract': 'lorem ipsum',
+        'category': {'id': 1, 'name': 'hep-th'},
         'category_id': 1,
         'id': 1,
         'title': 'A Model of Leptons'

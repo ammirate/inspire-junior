@@ -20,6 +20,8 @@ def create_app(config_env):
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # blueprints
+    app.url_map.strict_slashes = False
+
     from backend.views import bp, bp_api
     from backend.articles.views import bp_articles
     from backend.categories.views import bp_categories

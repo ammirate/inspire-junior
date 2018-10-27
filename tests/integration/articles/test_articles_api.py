@@ -4,6 +4,7 @@ import pkg_resources
 
 from backend.articles.api import (
     get_articles,
+    get_articles_by_category,
     read_article,
     create_article,
     update_article,
@@ -95,3 +96,17 @@ def test_delete_article(test_app, db_article):
     article_id = db_article.id
     delete_article(article_id)
     assert read_article(article_id) is None
+
+
+def test_get_articles_by_category(test_app, db_article):
+    category_id = db_article.category_id
+    articles = get_articles_by_category(category_id)
+
+    assert articles == [db_article]
+
+
+def test_get_articles_by_category_no_category(test_app, db_article):
+    category_id = 1234567
+    articles = get_articles_by_category(category_id)
+
+    assert articles == []

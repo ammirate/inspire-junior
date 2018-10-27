@@ -8,10 +8,11 @@ def test_article_schema():
         category_id=1,
     )
     expected_json = {
-        'category_id': 1,
         'abstract': '',
-        'id': 0,
-        'title': 'Partial Symmetries of Weak Interactions'
+         'category': {'id': 0, 'name': ''},
+         'category_id': 1,
+         'id': 0,
+         'title': 'Partial Symmetries of Weak Interactions'
     }
     serialized_data = ArticleSchema().dump(article).data
     assert serialized_data == expected_json
