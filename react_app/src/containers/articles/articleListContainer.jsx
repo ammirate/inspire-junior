@@ -21,7 +21,11 @@ class ArticleListContainer extends Component {
 
   render() {
     if (!this.state.articles) {
-      return <label>No articles</label>;
+      return (
+        <div className="container">
+          <h4>No articles</h4>
+        </div>
+      );
     }
 
     return (

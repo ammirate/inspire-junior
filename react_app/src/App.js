@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-
-import NavBar from "./containers/application/navBar";
-import ArticleListContainer from "./containers/articles/articleListContainer";
+import MainContainer from "./containers/mainContainer";
 
 class App extends Component {
   constructor(props) {
@@ -15,10 +13,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <div>
-          <NavBar />
-          <ArticleListContainer />
-        </div>
+        <MainContainer />
       </React.Fragment>
     );
   }
