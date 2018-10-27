@@ -3,14 +3,20 @@ scraper_site:
   ports:
   - "8080:5000"
 
+
 backend:
   build: .
   ports:
       - "5555:5555"
   volumes:
    - .:/code
+  links:
+  - scraper_site
+
 
 frontend:
   build: ./react_app
   ports:
   - "3000:3000"
+  links:
+  - backend
