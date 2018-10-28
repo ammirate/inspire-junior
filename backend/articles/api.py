@@ -2,22 +2,38 @@ from backend.db import db
 from backend.articles.models import Article
 from backend.articles.errors import ArticleMetadataError
 
+from backend.categories.api import read_category_by_name, create_category
+
 
 def _extract_data_from_json(json_model):
     metadata = dict(
-        category_id=json_model['category_id'],
+        category_id=json_model.get('category_id'),
         title=json_model['title'],
         abstract=json_model.get('abstract'),
     )
     return metadata
 
 
-def _check_data(json_model):
-    if 'title' not in json_model or 'category_id' not in json_model:
+def _check_data(json_model, smart=False):
+    if not isinstance(json_model, dict):
+        raise TypeError('Dict expected, got ' + str(type(json_model)))
+    if 'title' not in json_model:
         raise ArticleMetadataError(
-            '`Title` and `Category_id` are required fields. Got {}'.format(
+            '`Title` is a required field. Got {}'.format(
                 json_model)
         )
+    if smart:
+        if 'category' not in json_model:
+            raise ArticleMetadataError(
+                '`category` is a required field. Got {}'.format(
+                    json_model)
+            )
+    else:
+        if 'category_id' not in json_model:
+            raise ArticleMetadataError(
+                '`category_id` is a required field. Got {}'.format(
+                    json_model)
+            )
 
 
 def create_article(json_model):
@@ -34,6 +50,33 @@ def create_article(json_model):
     """
     _check_data(json_model)
     metadata = _extract_data_from_json(json_model)
+    article = Article(**metadata)
+    db.session.add(article)
+    db.session.commit()
+    return article
+
+
+def smart_create_article(json_model):
+    """Add an Article in the DB and the related category if it does not exist
+
+    Args:
+        json_model(Dict): the Article metadata to insert in the DB
+
+    Return:
+        (Article): the model just created
+
+    Raise:
+        ArticleMetadataError if the metadata is not compliant with the model
+    """
+    _check_data(json_model, smart=True)
+    metadata = _extract_data_from_json(json_model)
+
+    cat_name = json_model['category']
+    category = read_category_by_name(cat_name)
+    if not category:
+        category = create_category(cat_name)
+
+    metadata['category_id'] = category.id
     article = Article(**metadata)
     db.session.add(article)
     db.session.commit()

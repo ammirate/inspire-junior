@@ -33,8 +33,21 @@ def read_category(cat_id):
     Return:
         (Category): the Category requested or None
     """
-    article = db.session.query(Category).get(cat_id)
-    return article
+    category = db.session.query(Category).get(cat_id)
+    return category
+
+
+def read_category_by_name(name):
+    """Add a Category in the DB
+
+    Args:
+        cat_id(Int): the Category ID
+
+    Return:
+        (Category): the Category requested or None
+    """
+    category = db.session.query(Category).filter_by(name=name).one_or_none()
+    return category
 
 
 def get_categories():
@@ -46,20 +59,20 @@ def get_categories():
     return db.session.query(Category).all()
 
 
-def update_category(article_id, name):
+def update_category(category_id, name):
     raise NotImplementedError
 
 
-def delete_category(article_id):
+def delete_category(category_id):
     """Delete a Category from the DB
 
     Args:
-        article_id(Int): the Category's ID
+        category_id(Int): the Category's ID
 
     Return:
-        (Int): ID of the article deleted
+        (Int): ID of the category deleted
     """
-    return_val = db.session.query(Category).filter_by(id=article_id).delete()
+    return_val = db.session.query(Category).filter_by(id=category_id).delete()
     db.session.commit()
     return return_val
 
@@ -68,10 +81,10 @@ def delete_category_by_name(cat_name):
     """Delete a Category from the DB
 
     Args:
-        article_id(Int): the Category's ID
+        category_id(Int): the Category's ID
 
     Return:
-        (Int): ID of the article deleted
+        (Int): ID of the category deleted
     """
     return_val = db.session.query(Category).filter_by(name=cat_name).delete()
     db.session.commit()

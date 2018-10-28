@@ -5,6 +5,7 @@ from backend.articles.api import (
     get_articles_by_category,
     read_article,
     create_article,
+    smart_create_article,
 )
 from backend.articles.errors import ArticleMetadataError
 from backend.articles.serializers import ArticleSchema
@@ -45,9 +46,14 @@ def get_article(article_id):
 @bp_articles.route('/', methods=['POST'])
 def post_article():
     metadata = request.json
+    smart_flag = request.args.get('smart')
 
     try:
-        article = create_article(metadata)
+        if smart_flag:
+            article = smart_create_article(metadata)
+        else:
+            article = create_article(metadata)
+
     except ArticleMetadataError as e:
         abort(400, e.message)
 

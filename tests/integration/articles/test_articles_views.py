@@ -102,3 +102,33 @@ def test_post_article_bad_request(test_client):
         content_type='application/json',
     )
     assert resp.status_code == 400
+
+
+def test_post_article_smart_flag(test_client):
+    metadata = {
+        'category': 'new',
+        'title': 'A Model of Leptons'
+    }
+
+    expected_category = {
+        'id': 1,
+        'name': 'new'
+    }
+
+    expected_article = {
+        'abstract': '',
+        'category': expected_category,
+        'category_id': 1,
+        'id': 1,
+        'title': 'A Model of Leptons'
+    }
+
+    resp = test_client.post(
+        '/api/articles?smart=true',
+        data=json.dumps(metadata),
+        content_type='application/json',
+    )
+    resp_data = json.loads(resp.data)
+
+    assert resp.status_code == 200
+    assert resp_data == expected_article

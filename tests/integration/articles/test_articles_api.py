@@ -9,6 +9,7 @@ from backend.articles.api import (
     create_article,
     update_article,
     delete_article,
+    smart_create_article,
 )
 from backend.articles.errors import ArticleMetadataError
 
@@ -110,3 +111,16 @@ def test_get_articles_by_category_no_category(test_app, db_article):
     articles = get_articles_by_category(category_id)
 
     assert articles == []
+
+
+def test_smart_create_article(test_app):
+    metadata = {
+        'title': 'new article with new category',
+        'category': 'new'
+    }
+    article = smart_create_article(metadata)
+
+    assert article.title == metadata['title']
+    assert article.category
+    assert article.category.name == 'new'
+    assert article.category.id == 1

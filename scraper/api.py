@@ -1,13 +1,22 @@
+import os
 import requests
 from scraper.parser import ArticleParser
+from backend.articles.api import smart_create_article
 
-URL = 'http://localhost:8080/'
+
+try:
+    scraper_url = "http://{}:{}".format(
+        os.environ['SCRAPER_SITE_1_PORT_5000_TCP_ADDR'],
+        os.environ['SCRAPER_SITE_PORT_5000_TCP_PORT'],
+    )
+except KeyError:
+    scraper_url = "http://0.0.0.0:8080"
 
 
 class Scraper(object):
 
-    def __init__(self, url):
-        self.url = url
+    def __init__(self, url=None):
+        self.url = url or scraper_url
         self.parser = ArticleParser()
 
     def scrape(self):
@@ -24,10 +33,12 @@ class Scraper(object):
             page += 1
 
     def _run_scraper(self, page_number):
-        url = URL if page_number == 0 else URL + '?page={}'.format(page_number)
+        url = self.url if page_number == 0 else self.url + '?page={}'.format(
+            page_number)
         html = requests.get(url).text
         return html
 
     def store_articles(self, articles):
-        print('STORING')
-        print(articles)
+        for art in articles:
+            print('creating article {}'.format(art['title']))
+            smart_create_article(art)
