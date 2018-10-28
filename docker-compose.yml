@@ -14,6 +14,17 @@ backend:
   - scraper_site
 
 
+scraper:
+  build: .
+  ports:
+      - "1234:1234"
+  volumes:
+   - .:/code
+  links:
+  - scraper_site
+  - backend
+
+
 frontend:
   build: ./react_app
   ports:

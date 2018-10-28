@@ -31,9 +31,9 @@ class ArticleParser(object):
         return ''.join((categs).split())  # removes \n \r
 
     def parse_article(self, article_soup):
-        title = self._first(self.soup.findAll(TITLE_TAG, {'class': TITLE_CLASS}))
+        title = self._first(article_soup.findAll(TITLE_TAG, {'class': TITLE_CLASS}))
         abstract = self._first(
-            self.soup.findAll(ABSTRACT_TAG, {'class': ABSTRACT_CLASS})
+            article_soup.findAll(ABSTRACT_TAG, {'class': ABSTRACT_CLASS})
         )
         category = self._parse_category(article_soup)
         return {
@@ -49,6 +49,7 @@ class ArticleParser(object):
         article_divs = self.soup.findAll(ARTICLE_TAG, {'class': ARTICLE_CLASS})
 
         for div in article_divs:
-            articles.append(self.parse_article(div))
+            article = self.parse_article(div)
+            articles.append(article)
 
         return articles

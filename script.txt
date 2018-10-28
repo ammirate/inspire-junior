@@ -1,11 +1,11 @@
-curl -X GET http://0.0.0.0:5000/api/categories/;
+curl -X GET http://0.0.0.0:5555/api/categories/;
 
-curl -X POST http://0.0.0.0:5000/api/categories/ -d '{"name": "hep"}'  -H "Content-Type: application/json";
-curl -X POST http://0.0.0.0:5000/api/categories/ -d '{"name": "astro"}'  -H "Content-Type: application/json";
-curl -X POST http://0.0.0.0:5000/api/categories/ -d '{"name": "ph"}'  -H "Content-Type: application/json";
+curl -X POST http://0.0.0.0:5555/api/categories/ -d '{"name": "unknown"}'  -H "Content-Type: application/json";
+curl -X POST http://0.0.0.0:5555/api/categories/ -d '{"name": "astro"}'  -H "Content-Type: application/json";
+curl -X POST http://0.0.0.0:5555/api/categories/ -d '{"name": "ph"}'  -H "Content-Type: application/json";
 
 
-curl -X POST http://0.0.0.0:5000/api/articles/ -d '{
+curl -X POST http://0.0.0.0:5555/api/articles/ -d '{
     "title": "Semiclassical decay of near extremal five-branes",
     "abstract": "We argue that a near-extremal charge-kk type II NS fivebrane can be reliablydescribed in semiclassical string perturbation theory as k are large,",
     "category_id": 2
@@ -13,7 +13,7 @@ curl -X POST http://0.0.0.0:5000/api/articles/ -d '{
 
 
 
-curl -X POST http://0.0.0.0:5000/api/articles/ -d '{
+curl -X POST http://0.0.0.0:5555/api/articles/ -d '{
     "title": "Something hidden in the space",
     "abstract": "We argue that a near-extremal charge-kk type II NS fivebrane can be reliablydescribed in semiclassical string perturbation theory as k are large,",
     "category_id": 1
@@ -21,7 +21,7 @@ curl -X POST http://0.0.0.0:5000/api/articles/ -d '{
 
 
 
-curl -X POST http://0.0.0.0:5000/api/articles/ -d '{
+curl -X POST http://0.0.0.0:5555/api/articles/ -d '{
     "title": "Are we Alone in the Universe???",
     "abstract": "We argue that a near-extremal charge-kk type II NS fivebrane can be reliablydescribed in semiclassical string perturbation theory as k are large,",
     "category_id": 1
