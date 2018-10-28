@@ -4,8 +4,9 @@ import NavBar from "./application/navBar";
 import ArticleListContainer from "./articles/articleListContainer";
 import CategoriesContainer from "./categories/categoriesContainer";
 
-const ARTICLES_API = "http://0.0.0.0:5555/api/articles";
-const CATEGORIES_API = "http://0.0.0.0:5555/api/categories";
+const baseUrl = "http://0.0.0.0:5555";
+const articleApi = baseUrl + "/api/articles";
+const categoryApi = baseUrl + "/api/categories";
 
 class MainContainer extends Component {
   constructor(props) {
@@ -15,39 +16,34 @@ class MainContainer extends Component {
   }
 
   load_articles(cat_id) {
-    axios.get(ARTICLES_API + "?category_id=" + cat_id).then(resp => {
+    axios.get(articleApi + "?category_id=" + cat_id).then(resp => {
       this.setState({ articles: resp.data });
     });
   }
 
   load_categories() {
-    axios.get(CATEGORIES_API).then(resp => {
+    axios.get(categoryApi).then(resp => {
       this.setState({ categories: resp.data });
     });
   }
 
   componentWillMount() {
     this.setState({ loading: true });
-    // set state to loading
-    // request categories
-    // request articles
     this.load_categories();
     this.load_articles(-1); // all
   }
 
   componentDidMount() {
-    // remove loading state
     this.setState({ loading: false });
   }
 
   handleOnChange = event => {
     var cat_id = event.target.value;
-    console.log("selected category  " + cat_id);
     this.load_articles(cat_id);
   };
 
   render() {
-    if (this.state.loading) {
+    if (this.state.loading === true) {
       return <h1>Loading...</h1>;
     }
     return (

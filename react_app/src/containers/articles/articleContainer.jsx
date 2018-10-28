@@ -15,13 +15,17 @@ class ArticleContainer extends Component {
       <div className="list-group-item">
         <div className="card">
           <div className="card-body">
-            <h2 className="card-title"> {article["title"]} </h2>
-            <p className="card-text">{article["abstract"]}</p>
-            <div className="card-subtitle">
-              <span className="badge badge-primary">
-                {article["category"]["name"]}
-              </span>
+            <div className="row">
+              <div className="col-11">
+                <h2 className="card-title"> {article["title"]} </h2>
+              </div>
+              <div className="col1">
+                <span className="badge badge-primary">
+                  {article["category"]["name"]}
+                </span>
+              </div>
             </div>
+            <p className="card-text">{article["abstract"]}</p>
           </div>
         </div>
       </div>
