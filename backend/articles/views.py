@@ -1,3 +1,5 @@
+from __future__ import absolute_import, division, print_function
+
 from flask import abort, Blueprint, jsonify, request
 
 from backend.articles.api import (

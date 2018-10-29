@@ -1,3 +1,5 @@
+from __future__ import absolute_import, division, print_function
+
 from flask import Flask
 from flask_cors import CORS
 

@@ -1,3 +1,5 @@
+from __future__ import absolute_import, division, print_function
+
 from backend.db import db
 from backend.articles.models import Article
 from backend.articles.errors import ArticleMetadataError

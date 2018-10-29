@@ -1,3 +1,5 @@
+from __future__ import absolute_import, division, print_function
+
 from backend.db import db
 from backend.categories.models import Category
 from backend.categories.errors import CategoryValueError
