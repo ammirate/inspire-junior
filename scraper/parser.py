@@ -30,7 +30,7 @@ class ArticleParser(object):
         categs = self._first(category_node)
         return ''.join((categs).split())  # removes \n \r
 
-    def parse_article(self, article_soup):
+    def _parse_article(self, article_soup):
         title = self._first(article_soup.findAll(TITLE_TAG, {'class': TITLE_CLASS}))
         abstract = self._first(
             article_soup.findAll(ABSTRACT_TAG, {'class': ABSTRACT_CLASS})
@@ -49,7 +49,7 @@ class ArticleParser(object):
         article_divs = self.soup.findAll(ARTICLE_TAG, {'class': ARTICLE_CLASS})
 
         for div in article_divs:
-            article = self.parse_article(div)
+            article = self._parse_article(div)
             articles.append(article)
 
         return articles
