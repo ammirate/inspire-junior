@@ -8,6 +8,16 @@ class ArticleListContainer extends Component {
   }
 
   render() {
+    if (!this.props.articles.length) {
+      return (
+        <div className="row">
+          <div className="col-md-2 offset-md-5">
+            <img src="loading.gif" alt="Loading" />
+          </div>
+        </div>
+      );
+    }
+
     if (this.props.articles.length === 0) {
       return (
         <div className="container">

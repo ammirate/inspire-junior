@@ -9,8 +9,6 @@ class ArticleContainer extends Component {
   render() {
     const article = this.props.article;
 
-    console.log(this.props.article);
-
     return (
       <div className="list-group-item">
         <div className="card">
