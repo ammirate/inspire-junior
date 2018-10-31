@@ -33,6 +33,7 @@ Navigate to `http://localhost:3000` to see the `React App`.
 
 Tests
 -----
+Inside a virtualenvironment, run:
 
     $ ./run-test.sh
 
@@ -43,4 +44,4 @@ The goal of the project is to demonstrate how the scraper CLI fetches articles f
 All you need to do is connect into the *scraper* container and run the CLI command to start the scraping. After it finishes, you will see in the *frontend* app the same articles provided by the fake HEP repo.
 
     $ docker-compose exec scraper sh
-    $ cd python scraper/cli.py run
+    $ python scraper/cli.py run
